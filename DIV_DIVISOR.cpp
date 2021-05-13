@@ -3,7 +3,7 @@
 using namespace std;
 
 const int N = 1e6+1;
-const int maxN = 240;
+const int maxN = 240; // Highest divisor of a number [1,10^6] is 240.So,prime under 240 is enough.
 
 vector <bool> p(maxN+2,true);
 
@@ -28,7 +28,7 @@ void sieve()
 
 int divisor[N+2];
 
-void NOD()
+void NOD() // using sieve for number of divisors of numbers under n .
 {
     for(int i = 1;i<=N;i++)
     {
@@ -39,14 +39,14 @@ void NOD()
     }
 }
 
-bool ok(int n)
+bool ok(int n) // checking if the number is d(n) = p*q.
 {
     int x = divisor[n];
     for(int i = 2;i<=x;i++)
     {
-        if(p[i])
+        if(p[i]) // here p[i] == prime[p]
         {
-            if(p[x/i] && (x%i == 0))
+            if(p[x/i] && (x%i == 0)) // p[x/i] == prime[x/q] && as x/q could give unwanted value like 2.564 to 2 so ans could be different so checking if x%p == 0.
                 if(i != x/i)
                     return true;
         }
